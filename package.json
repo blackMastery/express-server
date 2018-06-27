@@ -1,0 +1,49 @@
+{
+  "name": "reactexpress",
+  "version": "1.0.0",
+  "description": "essay blog",
+  "main": "server.js",
+  "scripts": {
+    "start-dev": "nodemon server.js",
+    "start": "node index.js"
+  },
+  "author": "kevon",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "jshint": "^2.9.5",
+    "mocha": "^5.0.0",
+    "nodemon": "^1.14.6",
+    "request": "^2.83.0",
+    "sinon": "^4.1.6"
+  },
+  "repository": {
+    "type": "git"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "create-react-app",
+    "react"
+  ],
+  "dependencies": {
+    "async": "^2.6.0",
+    "bcrypt-nodejs": "0.0.3",
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.2",
+    "boom": "^7.1.1",
+    "connect-mongodb-session": "^1.4.0",
+    "cookie-parser": "^1.4.3",
+    "debug": "^3.1.0",
+    "ejs": "^2.5.8",
+    "express": "^4.16.2",
+    "express-jwt": "^5.3.0",
+    "express-session": "^1.15.6",
+    "express-validator": "^4.3.0",
+    "joi": "^13.1.0",
+    "jsonwebtoken": "^8.1.0",
+    "lodash": "^4.17.4",
+    "mongoose": "^5.0.0-rc1",
+    "morgan": "^1.9.0"
+  }
+}
