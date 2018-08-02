@@ -16,7 +16,14 @@ exports.post_list = function (req, res, next) {
 		console.log(authorization)
 	
 	Post.find({}, "title content comments user")
-	.populate("comments")
+	.populate({
+		path:"comments",
+		populate:{
+			path: "userId",
+			 select: "email firstname lastname date"
+		}
+
+	})
 	.populate({
 		path: 'user',
 		select: 'firstname lastname email'
@@ -36,7 +43,18 @@ exports.post_list = function (req, res, next) {
 
 exports.post_detail = function (req, res, next) {
 	Post.findById(req.params.id, "title content")
-	.populate("comments")
+	.populate({
+		path:"comments",
+		populate:{
+			path: "userId",
+			 select: "email firstname lastname date"
+		}
+
+	})
+	.populate({
+		path: 'user',
+		select: 'firstname lastname email'
+	})
     .exec(function (err, post) {
     	if (err) {
 				console.log(err)

@@ -70,11 +70,11 @@ router.get('/users/posts/:userid', userController.user_posts);
 router.post('/users/delete/:id', userController.user_delete);
 router.get('/posts', postController.post_list);
 
-router.get('/posts/comments/:id', postController.post_detail);
+router.get('/posts/:id', postController.post_detail);
 
 router.post('/posts/create',authtoken, postController.create_post);
 
-router.post('/posts/delete/:postid',authtoken, postController.post_delete);
+router.delete('/posts/delete/:postid',authtoken, postController.post_delete);
 
 router.post('/posts/update/:postid',authtoken, postController.post_update);
 

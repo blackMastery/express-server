@@ -27,33 +27,53 @@ exports.comment_list = function (req,res,next) {
 exports.comment_create = function (req, res, next) {
 	sanitizeBody('*').trim().escape();
     // console.log(req)
+    const {body} = req.body
 	let commentData = {
-		message: req.body.message,
-		postId: req.body.postId,
-		userId: req.body.userId,
+		message: body.message,
+		postId: body.postId,
+		userId: body.userId,
 	}
+	// console.log(">>>>>>>>>>>>>", req.body.body)
     const newComment = new Comment(commentData);
     const promise = newComment.save();
 	promise.then((comment)=>{
 			// res.send(comment.message)
-			Post.findById(req.body.postId)
+			Post.findById(body.postId)
 			.exec((err , post)=>{
 				if(err){
 					// next(boom.badRequest(boomErrorString(err.reason, err.path)))
 					// return
-					console.log(err)
+					// console.log(err)
 				}
 				post.comments.push(comment)
 
-				Post.findByIdAndUpdate(req.body.postId,
+				Post.findByIdAndUpdate(body.postId,
 					{$set: {comments: [...post.comments]}},
 					(err, doc)=>{
 						if(err){
 							console.log(err)
+
 						}
-						res.send("comment saved")
+						// res.send("comment saved")
+						// console.log(comment)
 					}
-				)
+				).populate({
+					path:"comments",
+					populate:{
+						path: "userId",
+						 select: "email firstname lastname date"
+					}
+					}).exec((err,docs)=>{
+						if (!err) {
+							console.log("MY DOCSSS",docs.comments,"my users",)
+							res.send(docs.comments);
+							res.end()
+
+						}
+					})
+
+
+
 
 
 			})

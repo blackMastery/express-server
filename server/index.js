@@ -6,7 +6,7 @@ const expressJwt = require('express-jwt')
 const  util = require('util');
 const debug = util.debuglog('server');
 const app = express();
-
+const cors = require('cors')
 
 
 const routes = require('../routes/index');
@@ -31,6 +31,7 @@ app.use(function(err, req, res, next) {
   res.status(err.httpStatusCode).json(err.message)
 
 })
+.use(cors())
 .use('/', routes)
 .use('/auth',authroutes)
 
